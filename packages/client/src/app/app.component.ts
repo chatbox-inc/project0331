@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'client';
+
+  logout(){
+    localStorage.clear()
+    location.reload()
+  }
 }
