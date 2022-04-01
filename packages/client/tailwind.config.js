@@ -4,9 +4,12 @@ module.exports = {
   content: [
     "./src/**/*.{html,ts}",
   ],
-  purge: [
-    "./src/**/*.{html,ts}",
-  ],
+  purge: {
+    enabled: true,
+    content: [
+      "./src/**/*.{html,ts}",
+    ],
+  },
   theme: {
     extend: {},
   },
