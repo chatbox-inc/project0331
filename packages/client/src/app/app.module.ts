@@ -8,6 +8,8 @@ import {NgxsModule} from "@ngxs/store";
 import {AuthState} from "./store/auth/auth.state";
 import {NgxsStoragePluginModule} from "@ngxs/storage-plugin";
 import {BoardsState} from "./store/boards/boards.state";
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,13 @@ import {BoardsState} from "./store/boards/boards.state";
       developmentMode: true
     }),
     NgxsStoragePluginModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
