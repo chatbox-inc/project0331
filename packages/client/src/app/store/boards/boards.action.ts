@@ -1,11 +1,7 @@
-
 export namespace BoardsAction {
   export class addOrgProject {
     static readonly type = '[Boards] addOrg';
-    constructor(
-      public org: string,
-      public number: number
-    ) {}
+    constructor(public org: string, public number: number) {}
   }
 
   export class updateOrgProjectSetting {
@@ -13,7 +9,7 @@ export namespace BoardsAction {
     constructor(
       public org: string,
       public number: number,
-      public setting: any
+      public setting: any,
     ) {}
   }
 }
