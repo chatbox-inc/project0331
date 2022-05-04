@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import {State, Action, StateContext, Selector} from '@ngxs/store';
-import {AuthAction} from "./auth.action";
-import {OctkitService} from "../../service/octkit.service";
+import { State, Action, StateContext, Selector } from '@ngxs/store';
+import { AuthAction } from './auth.action';
+import { OctkitService } from '../../service/octkit.service';
 
-export interface AuthProfileStateModel{
+export interface AuthProfileStateModel {
   login: string;
   avatarUrl: string;
   name: string;
 }
 
-export interface AuthStateModel{
+export interface AuthStateModel {
   token: string | null;
-  profile?: AuthProfileStateModel
+  profile?: AuthProfileStateModel;
 }
 
 @State<AuthStateModel>({
@@ -22,19 +22,17 @@ export interface AuthStateModel{
 })
 @Injectable()
 export class AuthState {
-  constructor(
-    private octkit: OctkitService
-  ) {}
+  constructor(private octkit: OctkitService) {}
 
   @Action(AuthAction.login)
-  async login(ctx: StateContext<AuthStateModel>,action: AuthAction.login) {
-    const result = await this.octkit.auth(action.token).viewer()
+  async login(ctx: StateContext<AuthStateModel>, action: AuthAction.login) {
+    const result = await this.octkit.auth(action.token).viewer();
 
-    console.log(result)
+    console.log(result);
     ctx.setState({
       token: action.token,
-      profile: result.viewer as AuthProfileStateModel
-    })
+      profile: result.viewer as AuthProfileStateModel,
+    });
   }
   //
   // @Action(TodoAction.Add)
@@ -43,7 +41,4 @@ export class AuthState {
   //   state.push(action.todo);
   //   ctx.setState(state);
   // }
-
-
-
 }

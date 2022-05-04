@@ -1,52 +1,60 @@
 import { Component, OnInit } from '@angular/core';
-import {Select, Store} from "@ngxs/store";
-import {BehaviorSubject, Observable, of} from "rxjs";
-import {BoardItemStateModel, BoardsState, BoardsStateModel} from "../../../../store/boards/boards.state";
-import {concatMap, distinct, filter, map, mergeMap, publish, startWith, switchMap, tap} from "rxjs/operators";
-import {ActivatedRoute, Route} from "@angular/router";
-import {FormControl, FormGroup} from "@angular/forms";
-import {BoardsAction} from "../../../../store/boards/boards.action";
+import { Select, Store } from '@ngxs/store';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import {
+  BoardItemStateModel,
+  BoardsState,
+  BoardsStateModel,
+} from '../../../../store/boards/boards.state';
+import {
+  concatMap,
+  distinct,
+  filter,
+  map,
+  mergeMap,
+  publish,
+  startWith,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
+import { ActivatedRoute, Route } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
+import { BoardsAction } from '../../../../store/boards/boards.action';
 
 @Component({
   selector: 'app-org-name-number-page',
   templateUrl: './org-name-number-page.component.html',
-  styleUrls: ['./org-name-number-page.component.scss']
+  styleUrls: ['./org-name-number-page.component.scss'],
 })
 export class OrgNameNumberPageComponent implements OnInit {
+  @Select(BoardsState) boards$: Observable<BoardsStateModel>;
 
-  @Select(BoardsState) boards$: Observable<BoardsStateModel>
-
-  public board: BoardItemStateModel | null = null
+  public board: BoardItemStateModel | null = null;
 
   public form = new FormGroup({
-    iteration: new FormControl(""),
-    sumup: new FormControl(""),
-  })
+    iteration: new FormControl(''),
+    sumup: new FormControl(''),
+  });
 
-  private issues: [] = []
+  private issues: [] = [];
 
-  constructor(
-    private route: ActivatedRoute,
-    private store: Store
-  ) { }
+  constructor(private route: ActivatedRoute, private store: Store) {}
 
-  get orgName(){
-    return this.route.snapshot.paramMap.get('name') as string
+  get orgName() {
+    return this.route.snapshot.paramMap.get('name') as string;
   }
 
-  get number(){
-    return parseInt(this.route.snapshot.paramMap.get('number') ?? "")
+  get number() {
+    return parseInt(this.route.snapshot.paramMap.get('number') ?? '');
   }
 
-  get url (){
-    return `https://github.com/orgs/${this.orgName}/projects/${this.number}`
+  get url() {
+    return `https://github.com/orgs/${this.orgName}/projects/${this.number}`;
   }
 
-  get settingRequired(){
-    return !!(this.board?.setting)
+  get settingRequired() {
+    return !!this.board?.setting;
   }
-
-
 
   // get iterationList$(){
   //   return this.fields$.pipe(
@@ -59,38 +67,45 @@ export class OrgNameNumberPageComponent implements OnInit {
   // }
 
   ngOnInit(): void {
-
-    this.boards$.pipe(
-      map((r)=>{
-        return r.boards.find( board => {
-          return board.type === "org" && board.name === this.orgName && board.number === this.number
-        })
-      })
-    ).subscribe((r)=>{
-      if(r){
-        this.board = r
-        if(this.board.setting){
-          this.form.setValue({
-            ...this.board.setting
-          })
+    this.boards$
+      .pipe(
+        map((r) => {
+          return r.boards.find((board) => {
+            return (
+              board.type === 'org' &&
+              board.name === this.orgName &&
+              board.number === this.number
+            );
+          });
+        }),
+      )
+      .subscribe((r) => {
+        if (r) {
+          this.board = r;
+          if (this.board.setting) {
+            this.form.setValue({
+              ...this.board.setting,
+            });
+          }
         }
-      }
-    })
+      });
 
-    this.form.valueChanges.pipe(
-      map(r=>JSON.stringify(r)),
-      distinct(),
-      map(r=>JSON.parse(r)),
-    ).subscribe(r=>{
-      console.log("hoge")
-      this.store.dispatch(new BoardsAction.updateOrgProjectSetting(
-        this.orgName,
-        this.number,
-        r
-      ))
-    })
-
-
+    this.form.valueChanges
+      .pipe(
+        map((r) => JSON.stringify(r)),
+        distinct(),
+        map((r) => JSON.parse(r)),
+      )
+      .subscribe((r) => {
+        console.log('hoge');
+        this.store.dispatch(
+          new BoardsAction.updateOrgProjectSetting(
+            this.orgName,
+            this.number,
+            r,
+          ),
+        );
+      });
 
     // this.form.valueChanges.subscribe(r=>{
     //
@@ -106,5 +121,4 @@ export class OrgNameNumberPageComponent implements OnInit {
     //   },
     // })
   }
-
 }

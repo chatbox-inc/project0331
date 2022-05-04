@@ -1,7 +1,1 @@
-
-
-export class BoardService{
-
-
-
-}
+export class BoardService {}

@@ -9,7 +9,7 @@ export const viewer_gql = `
     avatarUrl
   }
 }
-`
+`;
 
 /**
  * https://docs.github.com/ja/graphql/reference/objects#organization
@@ -59,7 +59,7 @@ query getProjects($login: String!, $number: Int!){
       }
     }
 }
-`
+`;
 
 /**
  * https://docs.github.com/ja/graphql/reference/objects#organization
@@ -100,4 +100,4 @@ query getProjects($login: String!, $number: Int!){
       }
     }
 }
-`
+`;
