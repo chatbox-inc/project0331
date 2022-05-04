@@ -52,11 +52,26 @@ export class BoardComponent implements OnInit {
       return f.name === this.board.setting?.iteration;
     });
     const iteration = JSON.parse(field?.settings ?? 'null');
-    this.iterationList = iteration?.configuration?.iterations ?? [];
+    console.log({ iteration });
+    // イテレテーションの設定値がない場合は、空の配列を返す
+    if (!iteration?.configuration) {
+      this.iterationList = [];
+      return;
+    }
+    const completed = iteration?.configuration?.completed_iterations;
+    const current = iteration?.configuration?.iterations;
+    const iterationIndex = completed.length || 0;
+    // 完了したイテレーションがある場合は過去のイテレーションもセット
+    if (completed) {
+      this.iterationList = current;
+    } else {
+      const completedReverse = completed.reverse();
+      this.iterationList = [...completedReverse, ...current];
+    }
 
     if (this.iterationList.length) {
       this.form.setValue({
-        iteration: this.iterationList[0].id,
+        iteration: this.iterationList[iterationIndex].id,
       });
       this.updateIssues();
     }
