@@ -62,7 +62,7 @@ export class BoardComponent implements OnInit {
     const current = iteration?.configuration?.iterations;
     const iterationIndex = completed.length || 0;
     // 完了したイテレーションがある場合は過去のイテレーションもセット
-    if (completed) {
+    if (!completed) {
       this.iterationList = current;
     } else {
       const completedReverse = completed.reverse();
@@ -70,6 +70,8 @@ export class BoardComponent implements OnInit {
     }
 
     if (this.iterationList.length) {
+      console.log(this.iterationList);
+      console.log({ completed, current, iterationIndex });
       this.form.setValue({
         iteration: this.iterationList[iterationIndex].id,
       });
