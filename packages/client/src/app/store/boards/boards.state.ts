@@ -42,7 +42,11 @@ export class BoardsState {
     ctx: StateContext<BoardsStateModel>,
     action: BoardsAction.addOrgProject,
   ) {
-    const result = await this.octkit.projectByOrgs(action.org, action.number);
+    const queryResult = await this.octkit.projectByOrgs({
+      login: action.org,
+      number: action.number,
+    });
+    console.log({ queryResult });
     const state = ctx.getState();
     const boards = [...state.boards.map((r) => ({ ...r }))];
     const existing = boards.find((p) => {
@@ -51,13 +55,13 @@ export class BoardsState {
       );
     });
     if (existing) {
-      existing.projectNext = result.organization.projectNext as any;
+      existing.projectNext = queryResult.organization.projectNext as any;
     } else {
       boards.push({
         type: 'org',
         name: action.org,
         number: action.number,
-        projectNext: result.organization.projectNext,
+        projectNext: queryResult.organization.projectNext,
       });
     }
     ctx.setState({
