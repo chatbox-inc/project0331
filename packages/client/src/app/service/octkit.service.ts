@@ -3,6 +3,12 @@ import { inject, Injectable } from '@angular/core';
 import { Octokit } from 'octokit';
 import { get_org_project_gql, viewer_gql } from './octkit.graphql';
 
+type ProjectByOrgsArgs = {
+  login: string;
+  number: number;
+  endCursor?: string;
+};
+
 /**
  * https://github.com/octokit/octokit.js/#graphql-api-queries
  */
@@ -25,15 +31,20 @@ export class OctkitService {
   }
 
   async viewer(): Promise<any> {
+    console.log({ viewer_gql });
     const result = await this.octokit.graphql(viewer_gql);
     return result;
   }
 
-  async projectByOrgs(login: string, number: number): Promise<any> {
-    const result = await this.octokit.graphql(get_org_project_gql, {
-      login,
-      number,
-    });
+  async projectByOrgs({
+    login,
+    number,
+    endCursor,
+  }: ProjectByOrgsArgs): Promise<any> {
+    console.log({ get_org_project_gql, login, number });
+    const args = { ...{ login, number }, ...(endCursor ? { endCursor } : '') };
+    console.log({ args });
+    const result = await this.octokit.graphql(get_org_project_gql, args);
     return result;
   }
 }

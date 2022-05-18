@@ -1,6 +1,9 @@
 {
   "$schema": "./node_modules/@angular/service-worker/config/schema.json",
   "index": "/index.html",
+  "appData": {
+    "title": "GitHub Project [beta] Velocity Counter"
+  },
   "assetGroups": [
     {
       "name": "app",

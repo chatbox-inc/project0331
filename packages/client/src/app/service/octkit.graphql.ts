@@ -15,7 +15,7 @@ export const viewer_gql = `
  * https://docs.github.com/ja/graphql/reference/objects#organization
  */
 export const get_org_project_gql = `
-query getProjects($login: String!, $number: Int!){
+query getProjects($login: String!, $number: Int!, $endCursor: String) {
   organization(login: $login){
       projectNext(number: $number) {
           id
@@ -27,10 +27,14 @@ query getProjects($login: String!, $number: Int!){
               settings
             }
           }
-          items(last: 100) {
+          items(last: 100, after: $endCursor) {
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
             nodes {
               id
-              fieldValues (first:10){
+              fieldValues (first:10) {
                 nodes{
                   projectField{
                     name
