@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Select, Store } from '@ngxs/store';
-import { AuthState, AuthStateModel } from '../../../../store/auth/auth.state';
 import { Observable } from 'rxjs';
-import { BoardsAction } from '../../../../store/boards/boards.action';
 import { Router } from '@angular/router';
-import {
-  BoardsState,
-  BoardsStateModel,
-} from '../../../../store/boards/boards.state';
+import { AuthState, AuthStateModel } from '@store/auth/auth.state';
+import { BoardsAction } from '@store/boards/boards.action';
+import { BoardsState, BoardsStateModel } from '@store/boards/boards.state';
 
 @Component({
   selector: 'app-index-page',

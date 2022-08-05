@@ -1,5 +1,4 @@
-import { inject, Injectable } from '@angular/core';
-
+import { Injectable } from '@angular/core';
 import { Octokit } from 'octokit';
 import { get_org_project_gql, viewer_gql } from './octkit.graphql';
 

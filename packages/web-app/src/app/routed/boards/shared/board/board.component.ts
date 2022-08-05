@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Form, FormControl, FormGroup } from '@angular/forms';
-import { BoardItemStateModel } from '../../../../store/boards/boards.state';
+import { FormControl, FormGroup } from '@angular/forms';
+import { BoardItemStateModel } from '@store/boards/boards.state';
 import { tap } from 'rxjs/operators';
-import { IssuesCollection } from '../../service/issues.collection';
+import { IssuesCollection } from 'src/app/routed/boards/service/issues.collection';
 
 @Component({
   selector: 'app-board',
