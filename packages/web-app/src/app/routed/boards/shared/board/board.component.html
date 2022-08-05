@@ -46,7 +46,7 @@
       [alt]="asignee.login"
     />
     <p matLine>
-      {{ issue.content.title }}
+      {{ issue.content.title || issues.getDraftTitle(issue) }}
     </p>
   </mat-list-item>
 </mat-list>
