@@ -4,8 +4,8 @@
     <mat-form-field appearance="fill">
       <mat-label>イテレーション項目</mat-label>
       <mat-select class="w-full" [formControl]="iteration">
-        <mat-option *ngFor="let node of fields " [value]="node.name">
-          {{node.name}}
+        <mat-option *ngFor="let node of fields" [value]="node.name">
+          {{ node.name }}
         </mat-option>
         <!--    <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>-->
       </mat-select>
@@ -15,8 +15,8 @@
     <mat-form-field appearance="fill">
       <mat-label>集計項目</mat-label>
       <mat-select [formControl]="sumup" multiple>
-        <mat-option *ngFor="let node of fields " [value]="node.name">
-          {{node.name}}
+        <mat-option *ngFor="let node of fields" [value]="node.name">
+          {{ node.name }}
         </mat-option>
         <!--    <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>-->
       </mat-select>

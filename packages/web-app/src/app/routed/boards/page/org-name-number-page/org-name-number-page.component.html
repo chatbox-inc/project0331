@@ -6,10 +6,7 @@
 </mat-list>
 
 <div class="mb-3 text-right">
-  <a
-    [href]="url"
-    target="_blank"
-  >
+  <a [href]="url" target="_blank">
     <mat-icon matListIcon>insert_link</mat-icon>
   </a>
 </div>
@@ -18,9 +15,7 @@
   <div class="mb-3">
     <mat-expansion-panel [expanded]="!settingRequired">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          Setting
-        </mat-panel-title>
+        <mat-panel-title> Setting </mat-panel-title>
       </mat-expansion-panel-header>
       <app-board-setting [board]="board" [setting]="form"></app-board-setting>
     </mat-expansion-panel>
