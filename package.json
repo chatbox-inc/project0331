@@ -8,6 +8,7 @@
     "bootstrap": "lerna bootstrap",
     "postinstall": "npm run bootstrap",
     "start": "lerna run start --stream",
+    "lint": "lerna run lint --stream",
     "build": "lerna run build --stream"
   },
   "devDependencies": {
