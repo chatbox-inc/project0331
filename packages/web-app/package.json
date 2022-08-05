@@ -1,6 +1,14 @@
 {
-  "name": "gyava.web-app",
+  "name": "@gyava/web-app",
   "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "lint": "eslint \"src/**/*.ts\" --ignore-pattern node_modules --fix && prettier \"src/**/{*.html,*.ts}\" --write",
+    "test": "ng test"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~12.1.2",

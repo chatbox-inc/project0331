@@ -1,5 +1,5 @@
 {
-  "name": "root",
+  "name": "@gyava/root",
   "private": true,
   "scripts" : {
     "bootstrap" : "lerna bootstrap",
