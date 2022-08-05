@@ -88,12 +88,4 @@ export class BoardsState {
       boards,
     });
   }
-
-  //
-  // @Action(TodoAction.Add)
-  // addHero(ctx: StateContext<any[]>, action: TodoAction.Add) {
-  //   const state = ctx.getState();
-  //   state.push(action.todo);
-  //   ctx.setState(state);
-  // }
 }

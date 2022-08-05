@@ -39,7 +39,6 @@ export class BoardComponent implements OnInit {
 
   ngOnInit(): void {
     this.form.valueChanges.pipe(tap((r) => {})).subscribe((r) => {
-      console.log('hoge');
       this.updateIssues();
     });
   }
@@ -90,7 +89,5 @@ export class BoardComponent implements OnInit {
       return iterationField?.value === this.form.value.iteration;
     });
     this.issues = new IssuesCollection(issues);
-    // const iteration = JSON.parse(field.settings)
-    // this.iterationList = iteration.configuration.iterations
   }
 }

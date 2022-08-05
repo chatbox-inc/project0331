@@ -97,7 +97,6 @@ export class OrgNameNumberPageComponent implements OnInit {
         map((r) => JSON.parse(r)),
       )
       .subscribe((r) => {
-        console.log('hoge');
         this.store.dispatch(
           new BoardsAction.updateOrgProjectSetting(
             this.orgName,
@@ -106,19 +105,5 @@ export class OrgNameNumberPageComponent implements OnInit {
           ),
         );
       });
-
-    // this.form.valueChanges.subscribe(r=>{
-    //
-    //   this.board$.pipe()
-    //   this.issues$.next(r)
-    // })
-    //
-    //
-    // this.issues$.subscribe({
-    //   next: console.log,
-    //   complete(){
-    //     console.log("かれた")
-    //   },
-    // })
   }
 }

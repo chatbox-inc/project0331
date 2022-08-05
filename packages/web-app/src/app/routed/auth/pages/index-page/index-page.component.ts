@@ -50,8 +50,5 @@ export class IndexPageComponent implements OnInit {
       .subscribe(() => {
         this.router.navigateByUrl('/boards');
       });
-    // console.log(result)
-    // console.log(this.token.invalid)
-    // console.log(this.form.get("token")?.hasError("required"))
   }
 }

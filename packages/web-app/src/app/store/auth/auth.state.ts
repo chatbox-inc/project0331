@@ -34,11 +34,4 @@ export class AuthState {
       profile: result.viewer as AuthProfileStateModel,
     });
   }
-  //
-  // @Action(TodoAction.Add)
-  // addHero(ctx: StateContext<any[]>, action: TodoAction.Add) {
-  //   const state = ctx.getState();
-  //   state.push(action.todo);
-  //   ctx.setState(state);
-  // }
 }
