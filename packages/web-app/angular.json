@@ -1,9 +1,12 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "60a3d812-d742-4f2a-82b1-9fd9970e7385"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "client": {
+    "web-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/client",
+            "outputPath": "dist/web-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -76,10 +79,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "client:build:production"
+              "browserTarget": "web-app:build:production"
             },
             "development": {
-              "browserTarget": "client:build:development"
+              "browserTarget": "web-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -87,7 +90,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "client:build"
+            "browserTarget": "web-app:build"
           }
         },
         "test": {
@@ -113,5 +116,5 @@
       }
     }
   },
-  "defaultProject": "client"
+  "defaultProject": "GYAVA"
 }

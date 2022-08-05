@@ -1,6 +1,6 @@
 {
-  "name": "client",
-  "short_name": "client",
+  "name": "web-app",
+  "short_name": "web-app",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
