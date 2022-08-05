@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { BoardItemStateModel } from '../../../../store/boards/boards.state';
 import { FormControl, FormGroup } from '@angular/forms';
+import { BoardItemStateModel } from '@store/boards/boards.state';
 
 @Component({
   selector: 'app-board-setting',

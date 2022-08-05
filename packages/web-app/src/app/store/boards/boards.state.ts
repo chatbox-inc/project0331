@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { OctkitService } from '../../service/octkit.service';
+import { OctkitService } from '@service/octkit.service';
 import { BoardsAction } from './boards.action';
 
 export interface BoardItemStateModel {

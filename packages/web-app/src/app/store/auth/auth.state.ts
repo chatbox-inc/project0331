@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { State, Action, StateContext, Selector } from '@ngxs/store';
+import { State, Action, StateContext } from '@ngxs/store';
+import { OctkitService } from '@service/octkit.service';
 import { AuthAction } from './auth.action';
-import { OctkitService } from '../../service/octkit.service';
 
 export interface AuthProfileStateModel {
   login: string;

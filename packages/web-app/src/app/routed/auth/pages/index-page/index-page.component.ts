@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { OctkitService } from '../../../../service/octkit.service';
 import {
   AbstractControl,
   FormControl,
@@ -8,8 +7,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { Select, Store } from '@ngxs/store';
-import { AuthAction } from '../../../../store/auth/auth.action';
-import { AuthState, AuthStateModel } from '../../../../store/auth/auth.state';
 import { Observable } from 'rxjs';
 
 @Component({

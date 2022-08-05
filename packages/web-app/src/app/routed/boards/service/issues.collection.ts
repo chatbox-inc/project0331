@@ -6,7 +6,23 @@ export class IssuesCollection {
   }
 
   getAsignee(issue: any): any[] {
+    // NOTE: Draft はデータ構造が異なるため
+    if (!issue.content?.assignees) {
+      return [
+        {
+          avatarUrl: 'assets/icons8-ghost-48.png',
+          login: 'Draft Icon',
+        },
+      ];
+    }
     return issue.content.assignees.nodes;
+  }
+
+  getDraftTitle(issue: any) {
+    const result = issue.fieldValues.nodes.find(
+      (node: any) => node.projectField.name === 'Title',
+    ).value;
+    return result;
   }
 
   open() {
