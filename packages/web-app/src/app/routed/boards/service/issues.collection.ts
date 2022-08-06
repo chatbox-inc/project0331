@@ -5,7 +5,7 @@ export class IssuesCollection {
     this.items = issues;
   }
 
-  getAsignee(issue: any): any[] {
+  getAssignee(issue: any): any[] {
     // NOTE: Draft はデータ構造が異なるため
     if (!issue.content?.assignees) {
       return [

@@ -40,10 +40,10 @@
 <mat-list *ngIf="board && iterationList.length" dense>
   <mat-list-item *ngFor="let issue of issues.items">
     <img
-      *ngFor="let asignee of issues.getAsignee(issue)"
+      *ngFor="let assignee of issues.getAssignee(issue)"
       matListAvatar
-      [src]="asignee.avatarUrl"
-      [alt]="asignee.login"
+      [src]="assignee.avatarUrl"
+      [alt]="assignee.login"
     />
     <p matLine>
       {{ issue.content.title || issues.getDraftTitle(issue) }}

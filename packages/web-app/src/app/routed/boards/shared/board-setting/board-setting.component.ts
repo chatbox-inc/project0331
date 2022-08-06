@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { BoardItemStateModel } from '@store/boards/boards.state';
+import { BoardItemStateModel } from '@store/boards/boards.interface';
 
 @Component({
   selector: 'app-board-setting',
@@ -27,6 +27,6 @@ export class BoardSettingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.board);
+    // console.log(this.board);
   }
 }

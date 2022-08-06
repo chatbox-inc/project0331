@@ -3,9 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { AuthState, AuthStateModel } from '@store/auth/auth.state';
+import { AuthState } from '@store/auth/auth.state';
 import { BoardsAction } from '@store/boards/boards.action';
-import { BoardsState, BoardsStateModel } from '@store/boards/boards.state';
+import { BoardsState } from '@store/boards/boards.state';
+import { AuthStateModel } from '@store/auth/auth.interface';
+import { BoardsStateModel } from '@store/boards/boards.interface';
 
 @Component({
   selector: 'app-index-page',
@@ -25,32 +27,38 @@ export class IndexPageComponent implements OnInit {
     return this.form.get('url') as FormControl;
   }
 
-  constructor(private router: Router, private store: Store) {}
+  constructor(private readonly router: Router, private readonly store: Store) {}
 
   ngOnInit(): void {}
 
+  #getOrgByUrl() {
+    return this.url.value.split('/')[4];
+  }
+
+  #getBoardNumberByUrl() {
+    return this.url.value.split('/')[6];
+  }
+
   open() {
-    if (this.form.invalid) {
-      return;
-    }
-    const segments = this.url.value.split('/');
-    const org = segments[4];
-    const number = segments[6];
+    if (this.form.invalid) return;
+    const org = this.#getOrgByUrl();
+    const number = this.#getBoardNumberByUrl();
     const action$ = this.store.dispatch(
       new BoardsAction.addOrgProject(org, parseInt(number)),
     );
     action$.subscribe({
-      next: (r) => {
+      next: () => {
         this.router.navigateByUrl(`/boards/org/${org}/${number}`);
       },
       error: (e) => {
         console.error(e);
-        alert('cant fetch repository infomation');
+        alert('cant fetch repository information');
       },
     });
   }
 
   navigate(board: any) {
+    console.log({ board });
     this.router.navigateByUrl(`/boards/org/${board.name}/${board.number}`);
   }
 }

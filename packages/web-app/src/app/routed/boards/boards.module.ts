@@ -6,7 +6,7 @@ import { OrgNameNumberPageComponent } from './page/org-name-number-page/org-name
 import { ReactiveFormsModule } from '@angular/forms';
 import { BoardComponent } from './shared/board/board.component';
 import { BoardSettingComponent } from './shared/board-setting/board-setting.component';
-import { MatuiModule } from '@shared/matui/matui.module';
+import { MatUIModule } from '@shared/matui/matui.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { MatuiModule } from '@shared/matui/matui.module';
   ],
   imports: [
     CommonModule,
-    MatuiModule,
+    MatUIModule,
     ReactiveFormsModule,
     BoardsRoutingModule,
   ],

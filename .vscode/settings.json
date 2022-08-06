@@ -1,5 +1,10 @@
 {
-  "cSpell.words": ["gyava", "Octkit", "sumup"],
+  "cSpell.words": [
+    "gyava",
+    "matui",
+    "Octkit",
+    "sumup"
+  ],
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#fa1b49",
     "activityBar.activeBorder": "#155e02",

@@ -7,6 +7,9 @@ import {
   GetProjectsDocument,
   WhoAmIDocument,
   GetProjectsQueryVariables,
+  GetProjectIssuesQuery,
+  GetProjectIssuesQueryVariables,
+  GetProjectIssuesDocument,
 } from 'src/generated/graphql';
 
 @Injectable({
@@ -62,5 +65,22 @@ export class GitHubGraphQLService {
         },
       },
     );
+  }
+
+  async getProjectIssues(login: string, number: number) {
+    const result = await this.client.query<
+      GetProjectIssuesQuery,
+      GetProjectIssuesQueryVariables
+    >({
+      query: GetProjectIssuesDocument,
+      variables: {
+        login,
+        number,
+      },
+    });
+    if (!result.data.organization) return;
+    if (!result.data?.organization?.projectNext?.__typename) return;
+    if (!result.data.organization.projectNext.items) return;
+    result.data.organization.projectNext.items
   }
 }

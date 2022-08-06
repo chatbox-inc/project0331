@@ -20,4 +20,4 @@ const modules = [
   imports: [...modules],
   exports: [...modules],
 })
-export class MatuiModule {}
+export class MatUIModule {}

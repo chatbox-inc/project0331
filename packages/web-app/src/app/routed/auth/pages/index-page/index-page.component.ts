@@ -4,7 +4,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { AuthAction } from '@store/auth/auth.action';
-import { AuthState, AuthStateModel } from '@store/auth/auth.state';
+import { AuthState } from '@store/auth/auth.state';
+import { AuthStateModel } from '@store/auth/auth.interface';
 
 @Component({
   selector: 'app-index-page',
@@ -18,7 +19,7 @@ export class IndexPageComponent implements OnInit {
     token: new FormControl('', Validators.required),
   });
 
-  constructor(private router: Router, private store: Store) {}
+  constructor(private readonly router: Router, private readonly store: Store) {}
 
   get token(): FormControl {
     return this.form.get('token') as FormControl;

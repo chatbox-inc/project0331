@@ -9,7 +9,10 @@ export namespace BoardsAction {
     constructor(
       public org: string,
       public number: number,
-      public setting: any,
+      public setting: {
+        iteration: string;
+        sumup: string[];
+      },
     ) {}
   }
 }
