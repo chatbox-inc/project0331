@@ -1,22 +1,8 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { GitHubGraphQLService } from '@service/github-graphql.service';
+import { BoardsStateModel } from '@store/boards/boards.interface';
 import { BoardsAction } from './boards.action';
-
-export interface BoardItemStateModel {
-  type: string;
-  name: string;
-  number: number;
-  setting?: {
-    iteration: string;
-    sumup: string[];
-  };
-  projectNext: any;
-}
-
-export interface BoardsStateModel {
-  boards: BoardItemStateModel[];
-}
 
 @State<BoardsStateModel>({
   name: 'boards',
@@ -53,6 +39,7 @@ export class BoardsState {
         p.type === 'org' && p.name === action.org && p.number === action.number
       );
     });
+    if (!result.data.organization?.projectNext) throw new Error('not found');
     if (existing) {
       existing.projectNext = result.data.organization?.projectNext;
     } else {

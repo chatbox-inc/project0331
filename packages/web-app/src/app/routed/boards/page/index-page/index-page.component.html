@@ -4,9 +4,13 @@
   <form [formGroup]="form">
     <mat-form-field class="w-full" appearance="fill">
       <mat-label>issues beta url</mat-label>
-      <input type="text" matInput placeholder="" [formControl]="url" />
-      <!--      <mat-hint>GitHub の Personal Access Token は <a href="">こちら</a>から取得できます。</mat-hint>-->
-      <mat-error *ngIf="url.invalid"> Please enter a valid url </mat-error>
+      <input
+        type="text"
+        matInput
+        placeholder="https://github.com/*/*/projects/n/views/n"
+        [formControl]="url"
+      />
+      <mat-error *ngIf="url.invalid">Please enter a valid url</mat-error>
     </mat-form-field>
   </form>
 </div>

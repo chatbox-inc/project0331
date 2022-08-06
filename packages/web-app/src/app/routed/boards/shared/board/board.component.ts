@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { BoardItemStateModel } from '@store/boards/boards.state';
-import { tap } from 'rxjs/operators';
+import { BoardItemStateModel } from '@store/boards/boards.interface';
+import { first } from 'rxjs/operators';
 import { IssuesCollection } from 'src/app/routed/boards/service/issues.collection';
 
 @Component({
@@ -16,7 +16,7 @@ export class BoardComponent implements OnInit {
   }
   @Input() set board(value: BoardItemStateModel) {
     this._board = value;
-    this.updateIterationList();
+    this.#updateIterationList();
   }
 
   form = new FormGroup({
@@ -38,20 +38,20 @@ export class BoardComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.form.valueChanges.pipe(tap((r) => {})).subscribe((r) => {
+    this.form.valueChanges.pipe(first()).subscribe(() => {
       this.updateIssues();
     });
   }
 
-  updateIterationList() {
-    console.log(this.board);
+  #updateIterationList() {
+    // console.log(this.board);
     const fields = this.board.projectNext?.fields.nodes ?? [];
     const field = fields.find((f: any) => {
-      console.log(f.name, this.board.setting?.iteration);
+      // console.log(f.name, this.board.setting?.iteration);
       return f.name === this.board.setting?.iteration;
     });
     const iteration = JSON.parse(field?.settings ?? 'null');
-    console.log({ iteration });
+    // console.log({ iteration });
     // イテレテーションの設定値がない場合は、空の配列を返す
     if (!iteration?.configuration) {
       this.iterationList = [];
@@ -69,8 +69,8 @@ export class BoardComponent implements OnInit {
     }
 
     if (this.iterationList.length) {
-      console.log(this.iterationList);
-      console.log({ completed, current, iterationIndex });
+      // console.log(this.iterationList);
+      // console.log({ completed, current, iterationIndex });
       this.form.setValue({
         iteration: this.iterationList[iterationIndex].id,
       });
@@ -79,7 +79,8 @@ export class BoardComponent implements OnInit {
   }
 
   updateIssues() {
-    console.log(this.board);
+    // console.log(this.board);
+    if (!this.board.projectNext.items.nodes) return;
     const issues = this.board.projectNext.items.nodes.filter((f: any) => {
       // return true
       const iterationField = f.fieldValues.nodes.find((r: any) => {

@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { distinct, map } from 'rxjs/operators';
+import { distinct, first, map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BoardsAction } from '@store/boards/boards.action';
-import {
-  BoardsState,
-  BoardsStateModel,
-  BoardItemStateModel,
-} from '@store/boards/boards.state';
+import { BoardsState } from '@store/boards/boards.state';
+import { BoardsStateModel, BoardItemStateModel } from '@store/boards/boards.interface';
 
 @Component({
   selector: 'app-org-name-number-page',
@@ -26,9 +23,10 @@ export class OrgNameNumberPageComponent implements OnInit {
     sumup: new FormControl(''),
   });
 
-  private issues: [] = [];
-
-  constructor(private route: ActivatedRoute, private store: Store) {}
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly store: Store,
+  ) {}
 
   get orgName() {
     return this.route.snapshot.paramMap.get('name') as string;
@@ -46,19 +44,10 @@ export class OrgNameNumberPageComponent implements OnInit {
     return !!this.board?.setting;
   }
 
-  // get iterationList$(){
-  //   return this.fields$.pipe(
-  //     map((r:any) =>{
-  //       return r.find((node:any)=>{
-  //         return node.name === this.form.value.iteration
-  //       })
-  //     })
-  //   )
-  // }
-
   ngOnInit(): void {
     this.boards$
       .pipe(
+        first(),
         map((r) => {
           return r.boards.find((board) => {
             return (
@@ -70,18 +59,17 @@ export class OrgNameNumberPageComponent implements OnInit {
         }),
       )
       .subscribe((r) => {
-        if (r) {
-          this.board = r;
-          if (this.board.setting) {
-            this.form.setValue({
-              ...this.board.setting,
-            });
-          }
-        }
+        if (!r) return;
+        this.board = r;
+        if (!this.board.setting) return;
+        this.form.setValue({
+          ...this.board.setting,
+        });
       });
 
     this.form.valueChanges
       .pipe(
+        first(),
         map((r) => JSON.stringify(r)),
         distinct(),
         map((r) => JSON.parse(r)),
