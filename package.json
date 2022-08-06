@@ -2,7 +2,7 @@
   "name": "@gyava/root",
   "private": true,
   "engines": {
-    "node": "16.*"
+    "node": "14.*"
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
