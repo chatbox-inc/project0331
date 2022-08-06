@@ -1,6 +1,6 @@
 {
-  "name": "web-app",
-  "short_name": "web-app",
+  "name": "@GYAVA/web-app",
+  "short_name": "@gyava/web-app",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",

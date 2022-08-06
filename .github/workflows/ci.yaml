@@ -5,9 +5,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   pull_request:
-    branches: [main]
+    branches: [master]
 
 jobs:
   build-and-test:
@@ -26,5 +26,4 @@ jobs:
       - run: npm run bootstrap
       - run: npm run build
       - run: npm run lint
-      # TODO: pass jest
       # - run: npm test
