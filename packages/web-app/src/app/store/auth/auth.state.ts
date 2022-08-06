@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext } from '@ngxs/store';
-import { OctkitService } from '@service/octkit.service';
+import { GitHubGraphQLService } from '@service/github-graphql.service';
 import { AuthAction } from './auth.action';
 
 export interface AuthProfileStateModel {
@@ -22,16 +22,16 @@ export interface AuthStateModel {
 })
 @Injectable()
 export class AuthState {
-  constructor(private octkit: OctkitService) {}
+  constructor(private readonly githubClient: GitHubGraphQLService) {}
 
   @Action(AuthAction.login)
   async login(ctx: StateContext<AuthStateModel>, action: AuthAction.login) {
-    const result = await this.octkit.auth(action.token).viewer();
+    const whoAmIResult = await this.githubClient.auth(action.token).whoAmI();
+    console.log({ whoAmIResult });
 
-    console.log(result);
     ctx.setState({
       token: action.token,
-      profile: result.viewer as AuthProfileStateModel,
+      profile: whoAmIResult.data.viewer as AuthProfileStateModel,
     });
   }
 }

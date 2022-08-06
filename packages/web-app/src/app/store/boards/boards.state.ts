@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { OctkitService } from '@service/octkit.service';
+import { GitHubGraphQLService } from '@service/github-graphql.service';
 import { BoardsAction } from './boards.action';
 
 export interface BoardItemStateModel {
@@ -35,14 +35,17 @@ export class BoardsState {
     };
   }
 
-  constructor(private octkit: OctkitService) {}
+  constructor(private readonly githubClient: GitHubGraphQLService) {}
 
   @Action(BoardsAction.addOrgProject)
   async addOrgProject(
     ctx: StateContext<BoardsStateModel>,
     action: BoardsAction.addOrgProject,
   ) {
-    const result = await this.octkit.projectByOrgs(action.org, action.number);
+    const result = await this.githubClient.projectByOrgs(
+      action.org,
+      action.number,
+    );
     const state = ctx.getState();
     const boards = [...state.boards.map((r) => ({ ...r }))];
     const existing = boards.find((p) => {
@@ -51,13 +54,13 @@ export class BoardsState {
       );
     });
     if (existing) {
-      existing.projectNext = result.organization.projectNext as any;
+      existing.projectNext = result.data.organization?.projectNext;
     } else {
       boards.push({
         type: 'org',
         name: action.org,
         number: action.number,
-        projectNext: result.organization.projectNext,
+        projectNext: result.data.organization?.projectNext,
       });
     }
     ctx.setState({
