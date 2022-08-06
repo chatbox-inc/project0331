@@ -6,7 +6,10 @@ import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BoardsAction } from '@store/boards/boards.action';
 import { BoardsState } from '@store/boards/boards.state';
-import { BoardsStateModel, BoardItemStateModel } from '@store/boards/boards.interface';
+import {
+  BoardsStateModel,
+  BoardItemStateModel,
+} from '@store/boards/boards.interface';
 
 @Component({
   selector: 'app-org-name-number-page',

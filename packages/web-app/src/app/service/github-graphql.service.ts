@@ -81,6 +81,6 @@ export class GitHubGraphQLService {
     if (!result.data.organization) return;
     if (!result.data?.organization?.projectNext?.__typename) return;
     if (!result.data.organization.projectNext.items) return;
-    result.data.organization.projectNext.items
+    result.data.organization.projectNext.items;
   }
 }
