@@ -1,10 +1,20 @@
 # GYAVA@web-app
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d5c5ade9-a328-4f44-a306-9861a4c54d1c/deploy-status)](https://app.netlify.com/sites/gyava/deploys)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.2.
+
+[netlify](https://gyava.netlify.app)
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## GraphQL
+- write *.graphql files in the `packages/web-app/src/queries/who-am-i.graphql` directory
+- Run `npm run codegen`
+- generate to `packages/web-app/src/generated/graphql.ts`
+- Create function on `packages/web-app/src/app/service/github-graphql.service.ts` from generated TS codes on `src/generated/graphql.ts`
 
 ## Code scaffolding
 
