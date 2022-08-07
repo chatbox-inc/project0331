@@ -1,7 +1,9 @@
-## 方針
+# GYAVA
+GitHub の Personal Access Token aka PAT を使って GitHub Project [beta] で運用してる Iteration や Velocity を計測するツール
+## Guideline
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/ba8a7029-d29e-4162-8c81-f2e88ae23d40/deploy-status)](https://app.netlify.com/sites/resonant-stroopwafel-506a31/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d5c5ade9-a328-4f44-a306-9861a4c54d1c/deploy-status)](https://app.netlify.com/sites/gyava/deploys)
 
 - Chrome App 形式
-- localstorage に PAT を入れる
+- local storage に PAT を入れる
 - npx tailwindcss init
