@@ -1,0 +1,7 @@
+query WhoAmI {
+  viewer {
+    login
+    name
+    avatarUrl
+  }
+}

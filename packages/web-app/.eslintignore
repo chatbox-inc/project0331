@@ -1,0 +1,4 @@
+karma.conf.js
+ngsw-config.json
+tailwind.config.js
+src/generated/

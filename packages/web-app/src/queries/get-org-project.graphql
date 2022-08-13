@@ -1,0 +1,44 @@
+query getProjects($login: String!, $number: Int!) {
+  organization(login: $login) {
+    projectNext(number: $number) {
+      id
+      title
+      url
+      fields(first: 100) {
+        nodes {
+          name
+          settings
+        }
+      }
+      items(last: 100) {
+        nodes {
+          id
+          fieldValues(first: 10) {
+            nodes {
+              projectField {
+                name
+                settings
+              }
+              value
+            }
+          }
+          content {
+            ... on Issue {
+              id
+              title
+              closed
+              state
+              assignees(first: 1) {
+                nodes {
+                  avatarUrl
+                  login
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
