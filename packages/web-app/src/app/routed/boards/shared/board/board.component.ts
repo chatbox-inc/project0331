@@ -38,7 +38,7 @@ export class BoardComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.form.valueChanges.pipe(first()).subscribe(() => {
+    this.form.valueChanges.subscribe(() => {
       this.updateIssues();
     });
   }

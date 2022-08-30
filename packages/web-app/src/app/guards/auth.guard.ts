@@ -31,14 +31,14 @@ export class AuthGuard implements CanActivate {
     | UrlTree {
     return this.auth$.pipe(
       take(1),
-      switchMap((r) => {
-        console.log(r);
-        if (!r.token) {
+      switchMap((auth) => {
+        console.log(auth);
+        if (!auth.token) {
           return throwError(() => {
             new Error('not authn');
           });
         }
-        return this.store.dispatch(new AuthAction.login(r.token));
+        return this.store.dispatch(new AuthAction.login(auth.token));
       }),
       map(() => {
         return true;
