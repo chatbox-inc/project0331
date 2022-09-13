@@ -1,0 +1,14 @@
+overwrite: true
+schema: "https://raw.githubusercontent.com/octokit/graphql-schema/master/schema.graphql"
+documents: "src/**/*.graphql"
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      #- add: "/* tslint:disable */"
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-apollo-angular"
+      - "fragment-matcher"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
